@@ -3,10 +3,7 @@ package horvath.gym;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Main class to list/add/remove reservations, log/register users
@@ -70,7 +67,7 @@ public class Gym {
     public void registerUser(String name, String lastName, GymTools.Gender gender, String password) {
         this.user = new User(name,lastName,gender,password);
         try{
-            GymTools.writeObjectToDisk(user, "" + "data/users/"+user.getName() + user.getLastName()+".acc");
+            GymTools.writeObjectToDisk(user, "" + "data/users/"+user.getName().toLowerCase() + user.getLastName().toLowerCase()+".acc");
         }
         catch(IOException ioe){
             throw new GymException("User not found", 102);
@@ -102,7 +99,7 @@ public class Gym {
      */
     public void logOff(){
         try {
-            GymTools.writeObjectToDisk(user, "data/users/"+user.getName() + user.getLastName()+".acc");
+            GymTools.writeObjectToDisk(user, "data/users/"+user.getName().toLowerCase(Locale.ROOT) + user.getLastName().toLowerCase(Locale.ROOT)+".acc");
             GymTools.writeObjectToDisk(reservations, "data/reservations.dat");
 
         } catch (IOException e) {

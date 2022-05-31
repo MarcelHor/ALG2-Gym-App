@@ -17,7 +17,7 @@ public class GymApp {
     private static final Scanner sc = new Scanner(System.in);
     private static boolean isLoggedIn;
     private static Gym gym = new Gym();
-    private static GymPrompt gymPrompt = GymPrompt.getGymPromptInstance();
+    private static GymPrompt gymPrompt = new GymPrompt();
 
 
     public static void main(String[] args) {
@@ -223,7 +223,7 @@ public class GymApp {
 
     private static void logIn() {
             System.out.println(gymPrompt.getLanguages().getString("input_name"));
-            String name = sc.nextLine();
+            String name = sc.nextLine().toLowerCase(Locale.ROOT);
             System.out.println(gymPrompt.getLanguages().getString("input_password"));
             String password = sc.nextLine();
             isLoggedIn = gym.logInUser(name, password);

@@ -13,23 +13,9 @@ public class GymPrompt {
     private Locale currentLocale;
     private ResourceBundle languages;
 
-    private static GymPrompt gymPromptInstance;
-
     public GymPrompt(){
         currentLocale = new Locale(language, country);
         languages = ResourceBundle.getBundle("text", currentLocale);
-    }
-
-    /**
-     * Singleton
-     * @return current instance
-     */
-    public static GymPrompt getGymPromptInstance()
-    {
-        if (gymPromptInstance == null) {
-            gymPromptInstance = new GymPrompt();
-        }
-        return gymPromptInstance;
     }
 
     public String getLanguage() {
