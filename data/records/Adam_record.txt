@@ -1,0 +1,4 @@
+PRSA = 48, 18
+ZADA = 20
+RAMENA = 10
+
