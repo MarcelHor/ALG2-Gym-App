@@ -1,0 +1,3 @@
+BICEPS = 15, 17
+TRICEPS = 26, 47
+

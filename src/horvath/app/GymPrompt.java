@@ -12,10 +12,18 @@ public class GymPrompt {
     private String country = "US";
     private Locale currentLocale;
     private ResourceBundle languages;
+    private static GymPrompt gymPrompt;
 
     public GymPrompt(){
         currentLocale = new Locale(language, country);
         languages = ResourceBundle.getBundle("text", currentLocale);
+    }
+
+    public static GymPrompt getInstance() {
+        if(gymPrompt == null){
+            gymPrompt = new GymPrompt();
+        }
+        return gymPrompt;
     }
 
     public String getLanguage() {

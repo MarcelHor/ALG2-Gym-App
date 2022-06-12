@@ -1,3 +1,0 @@
-TRICEPS = 5, 12, 15
-DEATHLIFT = 70, 80, 100
-

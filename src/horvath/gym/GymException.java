@@ -7,9 +7,10 @@ package horvath.gym;
  * <li> 100 - Error not specified.
  * <li> 102 - User file was not found, bad input or account does not exits.
  * <li> 103 - Bad input.
- * <li> 104 - Reservation file error.
+ * <li> 104 - File could not be loaded.
  * <li> 105 - Files could not be saved.
  * <li> 106 - Password could not be hashed.
+ * <li> 107 - File was not found.
  * </ul>
  * @author Marcel Horváth
  */

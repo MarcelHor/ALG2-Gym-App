@@ -1,8 +1,7 @@
 package horvath.gym;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.Serializable;
+import java.io.*;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -11,6 +10,8 @@ import java.util.*;
  * @author Marcel Horváth
  */
 public class User implements Serializable {
+    public static final String RECORDS_DIR = "records";
+    public static final String RECORD_SUFFIX = "_record.txt";
     private final String name;
     private final String lastName;
     private final UUID id;
@@ -26,6 +27,7 @@ public class User implements Serializable {
         this.gender = gender;
         this.id = UUID.randomUUID();
         this.password = GymTools.encryptThisString(password);
+
     }
 
     public String getName() {
@@ -109,26 +111,31 @@ public class User implements Serializable {
      * Prints the record file
      * Creates .txt file in data/records/"+name+"_record.txt
      */
-    public void printRecords(){
-
-        try (PrintWriter out = new PrintWriter("data/records/"+name+"_record.txt")) {
-            out.println(getRecordsToString());
+    public void printRecords(File dir) {
+        File recordsDir = Path.of(dir.getPath(), RECORDS_DIR).toFile();
+        if (!recordsDir.exists()) {
+            recordsDir.mkdirs();
         }
-        catch (FileNotFoundException e) {
+
+        try (PrintWriter out = new PrintWriter(Path.of(dir.getPath(), RECORDS_DIR, name+RECORD_SUFFIX).toFile())) {
+            out.println(getRecordsToString());
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+
         }
     }
 
     /**
      * Converts the currency
      * @param country string of country to decide, which fee should be used
+     * @rate rate exchange rate
      */
-    public void convertBalance(String country){
+    public void convertBalance(String country, float rate){
         if(country.equals("CZ")){
-            balance *=21;
+            balance *=rate;
         }
         else if(country.equals("US")){
-            balance /=21;
+            balance *=1/rate;
         }
     }
     /**
